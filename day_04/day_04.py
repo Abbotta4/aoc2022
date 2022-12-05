@@ -9,12 +9,25 @@ def check_contained(pair):
             return True
     return False
 
+def check_overlap(pair):
+    for _pair in pair, list(reversed(pair)):
+        if _pair[1][0] <= _pair[0][0] <= _pair[1][1] or _pair[1][0] <= _pair[0][1] <= _pair[1][1]:
+            return True
+    return False
+
 def count_contained(pairs):
     count = 0
     for pair in pairs:
         count += 1 if check_contained(pair) else 0
     return count
 
+def count_overlap(pairs):
+    count = 0
+    for pair in pairs:
+        count += 1 if check_overlap(pair) else 0
+    return count
+
 if __name__ == "__main__":
     assignment_pairs = read_input("input.txt")
     print(count_contained(assignment_pairs))
+    print(count_overlap(assignment_pairs))
