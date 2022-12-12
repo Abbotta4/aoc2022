@@ -57,7 +57,18 @@ def find_p1_sum(file_tree) -> int:
                 rsum += size
     return rsum
 
+def find_p2_size(file_tree) -> int:
+    minimum_size: int = file_tree.get_size() - 40000000
+    rsize: int = file_tree.get_size()
+    for node in file_tree.traverse():
+        if node.size == 0: # dir
+            size = node.get_size()
+            if rsize > size >= minimum_size:
+                rsize = size
+    return rsize
+
 if __name__ == "__main__":
     session_lines = read_input("input.txt")
     file_tree = parse_tree(session_lines[1:])
     print(find_p1_sum(file_tree))
+    print(find_p2_size(file_tree))
